@@ -29,7 +29,7 @@ export default function Burger({ burger }) {
   };
 
   return (
-    <div className="burger-card shadow-lg p-3 mb-5 bg-white rounded">
+    <div style = {{margin : '70px'}} className="burger-card shadow-lg p-3 mb-5 bg-white rounded">
       {/* Clickable image to show details in a modal */}
       <div onClick={handleShow} className="burger-image-container">
         <img
@@ -43,10 +43,39 @@ export default function Burger({ burger }) {
       <div className="burger-details">
         <h1 className="burger-name">{burger.name}</h1>
         <div className="flex-container">
-          <h3 className="price">BDT {burger.prices[0][variant]}</h3>
-          <button className="btn add-to-cart-button" onClick={handleAddToCart}>
-            Add To Cart
-          </button>
+          {/* Variant and Quantity selection */}
+          <div className="m-1 w-100">
+            <select
+              value={variant}
+              onChange={(e) => setVariant(e.target.value)}
+              className="variant-select w-100"
+            >
+              {Object.keys(burger.prices[0]).map((v) => (
+                <option key={v} value={v}>
+                  {v}
+                </option>
+              ))}
+            </select>
+          </div>
+          <div className="m-1 w-100">
+            <input
+              type="number"
+              value={quantity}
+              onChange={(e) => setQuantity(e.target.value)}
+              className="quantity-input w-100"
+            />
+          </div>
+        </div>
+        <div className="flex-container">
+          {/* Price and Add to Cart button */}
+          <div className="m-1 w-100">
+            <h3 className="price">BDT {burger.prices[0][variant]}</h3>
+          </div>
+          <div className="m-1 w-100">
+            <button className="btn add-to-cart-button w-100" onClick={handleAddToCart}>
+              Add To Cart
+            </button>
+          </div>
         </div>
       </div>
 
